@@ -111,7 +111,7 @@ def calculate_date_range(days: int = 60) -> tuple[datetime, datetime, str, str]:
     return start_date, end_date, start_date_str, end_date_str
 
 
-def load_email_template(template_file: str = "email_template.html") -> str:
+def load_email_template(template_file: str = "templates/email_template.html") -> str:
     """
     Load the email template content.
     

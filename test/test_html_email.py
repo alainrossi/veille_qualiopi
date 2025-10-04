@@ -8,10 +8,11 @@ import sys
 from pathlib import Path
 
 # Add the emailer directory to the Python path
-sys.path.append(str(Path(__file__).parent / "emailer"))
+sys.path.append(str(Path(__file__).parent.parent / "emailer"))
+sys.path.append(str(Path(__file__).parent.parent))
 
-from emailer.emailer.emailer import EmailSender
-from emailer.emailer.config import load_from_dotenv
+from emailer.emailer import EmailSender
+from emailer.config import load_from_dotenv
 
 
 def test_html_email():

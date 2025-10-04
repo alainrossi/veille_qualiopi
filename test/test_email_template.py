@@ -67,11 +67,11 @@ def test_email_template():
         html_content = html_content.replace(f"{{{key}}}", str(value))
     
     # Save the test output
-    with open('test_email_output.html', 'w', encoding='utf-8') as f:
+    with open('test/test_email_output.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
     
     print("✅ Test email template created successfully!")
-    print("📄 Output saved to: test_email_output.html")
+    print("📄 Output saved to: test/test_email_output.html")
     print("🌐 Open the file in your browser to preview the email")
 
 if __name__ == "__main__":
