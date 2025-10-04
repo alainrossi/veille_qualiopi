@@ -1,0 +1,86 @@
+veille_juridique:
+  prompt: >
+    Expert en Veille Réglementaire - Formation Professionnelle France
+
+    Tu es un expert reconnu en droit de la formation professionnelle, spécialisé dans l'analyse des évolutions réglementaires françaises. Ta mission consiste à identifier et analyser les changements législatifs et réglementaires récents.
+    OBJECTIF
+    Réalise une veille juridique exhaustive sur les évolutions réglementaires de la formation professionnelle en France entre {start_date} et {end_date}, en te concentrant sur les risques et opportunités pour les organismes de formation.
+    
+    PÉRIMÈTRE DE RECHERCHE
+    Inclure obligatoirement :
+
+    Décrets, arrêtés et circulaires publiés au Journal Officiel
+    Projets de loi et amendements en cours d'examen
+    Rapports et avis de la Cour des comptes
+    Communications de France Compétences
+    Évolutions du référentiel national qualité
+    Modifications du Code du travail (livre III - formation professionnelle)
+
+    Exclure systématiquement :
+    Les mesures concernant uniquement les titres RNCP
+    Dispositifs exclusivement dédiés à l'apprentissage et aux CFA
+    Bilans de compétences et orientation professionnelle
+
+    STRUCTURE DU RAPPORT
+    1. FORMATION PROFESSIONNELLE - CADRE GÉNÉRAL
+
+    Nouveaux textes réglementaires et leurs implications
+    Évolutions du financement et des contributions
+    Modifications des obligations des organismes de formation
+    Impacts sur les relations OF/OPCO/entreprises
+
+    2. COMPTE PERSONNEL DE FORMATION (CPF)
+
+    Changements dans les modalités d'utilisation
+    Évolutions des critères d'éligibilité
+    Modifications des procédures d'abondement
+    Nouvelles règles de contrôle et de sanction
+
+    3. CERTIFICATION QUALIOPI
+
+    Évolutions du référentiel national qualité
+    Nouveaux critères d'audit et d'évaluation
+    Modifications des procédures de certification
+    Impacts sur la sous-traitance et les partenariats
+
+    4. PRINCIPAUX IMPACTS
+    Synthèse des principaux risques et opportunités
+
+
+    CONSIGNES DE PRÉSENTATION
+  
+    Utilise une introduction claire, des paragraphes concis et des points clés sous forme de puces. Veillez à adopter un ton formel et 
+    à rendre le contenu facile à lire pour des destinataires non spécialistes.
+    Donne la réponse sous forme du corps d'un email au format HTML avec des balises appropriées pour une présentation claire et professionnelle. 
+    N'ajoute pas de balises de titre, "Madame, Monsieur" ou de signature.
+
+    Sources : Cite systématiquement les références officielles (numéro de décret, date JO, articles modifiés)
+    Dates d'entrée en vigueur : Précise les échéances d'application
+    Impacts pratiques : Explique les conséquences concrètes pour les organismes de formation
+    Liens utiles : Fournis les URL des textes officiels quand disponibles avec des balises <a href="">
+
+    MOTS-CLÉS DE RECHERCHE PRIORITAIRES
+    Formation professionnelle France {datetime.now().year}, décret formation continue, Qualiopi évolution, CPF réforme, France Compétences réglementation, Code travail formation, OPCO nouvelles règles, organisme formation obligations
+    Recherche prioritairement sur les sites : legifrance.gouv.fr, travail-emploi.gouv.fr, francecompetences.fr, service-public.fr, centre-inffo.fr, moncompteformation.gouv.fr, editions-legislatives.fr, www.ccomptes.fr, budget.gouv.fr
+
+  model: sonar-pro
+
+veille_pedagogique_technologique:
+  prompt: >
+    I manage a professional training centre specialized in English teaching (for presential, online/visio, and blended e-learning formats, also preparing learners for professional English exams and certifications). I want an expert, up-to-date overview of recent innovations, both pedagogical methods and technological tools, that are shaping the field of English language teaching today. 
+    Please include:
+    The newest research-based teaching approaches in adult/professional English learning (e.g. adaptive learning, task-based learning, AI-powered assessment).
+    Innovative uses of technology in ESL/EFL: generative AI tutors, immersive VR/AR training, adaptive e-learning platforms, learning analytics, and gamification.
+    How these innovations are being applied in professional contexts (business English, exam preparation, workplace communication).
+    Evidence of effectiveness: mention key findings from recent studies, pilot projects, or recognized organisations (TESOL, Cambridge, etc.).
+    New certifications eligible to the CPF.
+    Practical recommendations for training centres like mine to integrate these practices into presential, online, and hybrid courses.
+
+    PRESENTATION GUIDELINES
+    Use a clear introduction, concise paragraphs, and key points in bullet form. Ensure you adopt a formal tone and make the content easy to read for non-specialist recipients.
+    Provide the response in the form of an email body in HTML format with appropriate tags for clear and professional presentation.
+    Do not add title tags, "Dear Sir/Madam" or signature.
+    Sources: Systematically cite references
+    Useful links: Provide URLs of official texts when available with <a href=""> tags
+
+  model: sonar-pro

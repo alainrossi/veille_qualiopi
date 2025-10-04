@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille {type} - Période du {start_date} au {end_date}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .email-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header .subtitle {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .greeting {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .report-content {
+            margin: 20px 0;
+            line-height: 1.7;
+        }
+        
+        .report-content h1 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        .report-content h2 {
+            color: #34495e;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+        }
+        
+        .report-content h3 {
+            color: #34495e;
+            font-size: 16px;
+            margin: 15px 0 8px 0;
+        }
+        
+        .report-content p {
+            margin: 12px 0;
+            text-align: justify;
+        }
+        
+        .report-content ul, .report-content ol {
+            margin: 12px 0;
+            padding-left: 25px;
+        }
+        
+        .report-content li {
+            margin: 6px 0;
+        }
+        
+        .report-content strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .report-content a {
+            color: #3498db;
+            text-decoration: none;
+            border-bottom: 1px dotted #3498db;
+        }
+        
+        .report-content a:hover {
+            color: #2980b9;
+            border-bottom: 1px solid #2980b9;
+        }
+        
+        .signature {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header, .content, .footer {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .header .subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Veille {type}</h1>
+            <p class="subtitle">Période du {start_date} au {end_date}</p>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <div class="greeting">
+                Bonjour à tous,
+            </div>
+            
+            <div class="report-content">
+                {response_text}
+            </div>
+            
+            <div class="signature">
+                Cordialement,<br>
+                <strong>Alain ROSSI</strong>
+                Appleton School of English
+                07 66 17 78 84
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Ce rapport de veille a été généré automatiquement le {end_date}</p>
+        </div>
+    </div>
+</body>
+</html>
