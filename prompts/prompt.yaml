@@ -48,10 +48,11 @@ veille_juridique:
 
 
     CONSIGNES DE PRÉSENTATION
-  
-    Utilise une introduction claire, des paragraphes concis et des points clés sous forme de puces. Veillez à adopter un ton formel et 
-    à rendre le contenu facile à lire pour des destinataires non spécialistes.
-    Donne la réponse sous forme du corps d'un email au format HTML avec des balises appropriées pour une présentation claire et professionnelle. 
+    Si aucune évollution n'a été identifiée, n'écrit rien et retire la section correspondante du rapport.
+    Utilise une introduction claire, des paragraphes concis et des points clés sous forme de puces. Adopte un ton professionnel 
+     rend le contenu facile à lire pour des destinataires non spécialistes.
+    Donne la réponse sous forme du corps d'un email au format HTML avec des balises <p>, <ul>, <li>, <a>, <h1>, <h2>, <h3>, <h4>.
+    N'utiliser pas de balises <b> à l'intérieur des balises <li>.    
     N'ajoute pas de balises de titre, "Madame, Monsieur" ou de signature.
 
     Sources : Cite systématiquement les références officielles (numéro de décret, date JO, articles modifiés)
@@ -60,27 +61,65 @@ veille_juridique:
     Liens utiles : Fournis les URL des textes officiels quand disponibles avec des balises <a href="">
 
     MOTS-CLÉS DE RECHERCHE PRIORITAIRES
-    Formation professionnelle France {datetime.now().year}, décret formation continue, Qualiopi évolution, CPF réforme, France Compétences réglementation, Code travail formation, OPCO nouvelles règles, organisme formation obligations
+    Formation professionnelle France {current_year}, décret formation continue, Qualiopi évolution, CPF réforme, France Compétences réglementation, Code travail formation, OPCO nouvelles règles, organisme formation obligations
     Recherche prioritairement sur les sites : legifrance.gouv.fr, travail-emploi.gouv.fr, francecompetences.fr, service-public.fr, centre-inffo.fr, moncompteformation.gouv.fr, editions-legislatives.fr, www.ccomptes.fr, budget.gouv.fr
 
   model: sonar-pro
 
 veille_pedagogique_technologique:
   prompt: >
-    I manage a professional training centre specialized in English teaching (for presential, online/visio, and blended e-learning formats, also preparing learners for professional English exams and certifications). I want an expert, up-to-date overview of recent innovations, both pedagogical methods and technological tools, that are shaping the field of English language teaching today. 
-    Please include:
-    The newest research-based teaching approaches in adult/professional English learning (e.g. adaptive learning, task-based learning, AI-powered assessment).
-    Innovative uses of technology in ESL/EFL: generative AI tutors, immersive VR/AR training, adaptive e-learning platforms, learning analytics, and gamification.
-    How these innovations are being applied in professional contexts (business English, exam preparation, workplace communication).
-    Evidence of effectiveness: mention key findings from recent studies, pilot projects, or recognized organisations (TESOL, Cambridge, etc.).
-    New certifications eligible to the CPF.
-    Practical recommendations for training centres like mine to integrate these practices into presential, online, and hybrid courses.
+    You are my research and briefing assistant. Your task: produce an up-to-date, evidence-based update for my English-teaching team focused on Teaching English as a Foreign Language (TEFL/TESP) for professionals.
 
-    PRESENTATION GUIDELINES
-    Use a clear introduction, concise paragraphs, and key points in bullet form. Ensure you adopt a formal tone and make the content easy to read for non-specialist recipients.
+    Objectives
+
+    Identify the most important developments from the last 3 months that impact professional/ESP teaching (Business English, industry-specific English, exam prep).
+    Synthesize into a teacher-facing email.
+
+    Scope
+
+    Pedagogy for adult/professional learners: andragogy, workplace learning, microlearning, task-based and project-based learning, intercultural communication, feedback practices.
+    Assessment and certification: CEFR-aligned practices; updates to TOEIC/TOEFL/IELTS/Linguaskill/LanguageCert/OET/BEC/ICAO Aviation English/Maritime English; remote proctoring; validity/reliability.
+    Technology: AI in teaching and assessment (prompting, feedback automation, speech tech), new popular apps and e-learning platforms.
+    Existing tools: New developments on Linguahouse and macmillanenglishcampus-lms.com
+
+    Method
+
+    Browse the web for primary and high-quality secondary sources published within the last 3 months unless a seminal source is needed. Prefer: peer-reviewed journals, major ELT publishers/research arms, LinkedIn posts, exam boards (ETS, Cambridge, Theenglishquiz, LanguageCert), OECD/EU reports, reputable edtech blogs with data, and practitioner reports with evidence. Check and report novelties on Linguahouse.com and macmillanenglishcampus-lms.com
+
+    Cite sources inline with links. After any claim that is not common knowledge or could have changed recently, add a short citation in parentheses with source name and year, and include a final references list.
+    Where evidence is mixed, show both sides briefly and state the practical implication.
+    Avoid paywalled sources when a credible open summary exists.
+
+    Deliverables
+
+    Executive snapshot (max 120 words): what changed, why it matters now.
+    What’s new and why it matters (bulleted):
+    Pedagogy (3–5 bullets)
+    Assessment/certifications (3–5 bullets)
+    Technology/AI (3–5 bullets)
+    For each bullet: claim + 1-sentence evidence + source
+
+    Mini deep-dives (3 items, ~120–150 words each):
+    One on AI use in professional English (prompt design, feedback loops, academic integrity).
+    One on assessment shifts relevant to [your main exams].
+    One on effective blended models for busy professionals (session length, spacing, microlearning).
+
+    References:
+    Full list with working links; prioritize {start_year}–{end_year} sources; include publish dates.
+
+    Formatting
     Provide the response in the form of an email body in HTML format with appropriate tags for clear and professional presentation.
     Do not add title tags, "Dear Sir/Madam" or signature.
-    Sources: Systematically cite references
     Useful links: Provide URLs of official texts when available with <a href=""> tags
+    Use clear headings, bullet lists, and short paragraphs.
+    Mark any uncertainties or contested findings.
+
+    Constraints
+
+    Be specific and practical; avoid generic ELT tips.
+    Tailor examples and delivery modes: in-person, online/visio, e-learning.
+    Assume teacher familiarity with CEFR B1–C1 professional contexts.
+    Do not hallucinate exam policy changes; verify on official exam-board sites.
+        
 
   model: sonar-pro

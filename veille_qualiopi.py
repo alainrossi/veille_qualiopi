@@ -160,13 +160,57 @@ def extract_prompt_data(config: dict, prompt_type: str = "veille_juridique", day
         # Replace date placeholders with actual dates
         start_date, end_date, start_date_str, end_date_str = calculate_date_range(days)
         
+        # Get current year and calculate year range
+        current_year = datetime.now().year
+        start_year = current_year
+        end_year = current_year + 1
+        
+        # Calculate report date (3 months ago for the English prompt)
+        report_date = (datetime.now() - timedelta(days=90)).strftime("%d/%m/%Y")
+        
         # Replace placeholders in prompt
         prompt = prompt.replace("{start_date}", start_date_str)
         prompt = prompt.replace("{end_date}", end_date_str)
+        prompt = prompt.replace("{current_year}", str(current_year))
+        prompt = prompt.replace("{report_date}", report_date)
+        prompt = prompt.replace("{start_year}", str(start_year))
+        prompt = prompt.replace("{end_year}", str(end_year))
         
         return prompt, model
     except KeyError as e:
         raise KeyError(f"Missing required key '{prompt_type}' in configuration: {e}")
+
+
+def clean_response_text(response_text: str) -> str:
+    """
+    Clean the response text from Perplexity AI by removing markdown code block syntax.
+    
+    Args:
+        response_text (str): Raw response text that may contain markdown code blocks
+        
+    Returns:
+        str: Cleaned HTML content
+    """
+    if not response_text:
+        return response_text
+    
+    # Remove markdown code block syntax
+    # Remove ```html at the beginning
+    if response_text.strip().startswith('```html'):
+        response_text = response_text.strip()[7:]  # Remove ```html
+    
+    # Remove ``` at the end
+    if response_text.strip().endswith('```'):
+        response_text = response_text.strip()[:-3]  # Remove ```
+    
+    # Also handle cases where there might be ``` without html
+    if response_text.strip().startswith('```'):
+        response_text = response_text.strip()[3:]  # Remove ```
+    
+    # Clean up any leading/trailing whitespace
+    response_text = response_text.strip()
+    
+    return response_text
 
 
 def load_recipients_config(recipients_file: str = "recipients.json") -> dict:
@@ -233,6 +277,11 @@ def send_email_report(response_text: str, prompt_type: str = "veille_juridique",
         print(f"   To: {len(to_recipients)} recipients")
         print(f"   CC: {len(cc_recipients)} recipients")
         
+        # Clean the response text to remove markdown code block syntax
+        print("🧹 Cleaning response text...")
+        cleaned_response_text = clean_response_text(response_text)
+        print("✅ Response text cleaned successfully")
+        
         # Load and format email template
         print("📄 Loading email template...")
         try:
@@ -253,14 +302,14 @@ def send_email_report(response_text: str, prompt_type: str = "veille_juridique",
             formatted_email = email_template.replace("{type}", type_display)
             formatted_email = formatted_email.replace("{start_date}", start_date_str)
             formatted_email = formatted_email.replace("{end_date}", end_date_str)
-            formatted_email = formatted_email.replace("{response_text}", response_text)
+            formatted_email = formatted_email.replace("{response_text}", cleaned_response_text)
             
             print("✅ Email template formatted successfully")
             
         except FileNotFoundError as e:
             print(f"⚠️  Warning: {e}")
             print("   Using response text directly without template formatting...")
-            formatted_email = response_text
+            formatted_email = cleaned_response_text
         
         # Initialize email sender
         sender = EmailSender(
