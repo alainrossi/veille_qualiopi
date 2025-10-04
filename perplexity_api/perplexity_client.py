@@ -151,7 +151,7 @@ class PerplexityClient:
                 error_data = e.response.json()
                 if "error" in error_data:
                     error_msg = error_data["error"].get("message", error_msg)
-            except:
+            except (ValueError, KeyError):
                 pass
             raise PerplexityAPIError(error_msg, e.response.status_code, e.response.json() if e.response else None)
         

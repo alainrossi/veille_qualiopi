@@ -61,7 +61,7 @@ def test_email_template():
     with open('templates/email_template.html', 'r', encoding='utf-8') as f:
         template = f.read()
     
-    # Replace placeholders (avoiding CSS curly braces)
+    # Replace placeholders
     html_content = template
     for key, value in template_data.items():
         html_content = html_content.replace(f"{{{key}}}", str(value))

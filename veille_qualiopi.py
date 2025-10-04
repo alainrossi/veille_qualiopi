@@ -17,8 +17,10 @@ import sys
 import os
 import yaml
 import argparse
+import json
 from pathlib import Path
 from datetime import datetime, timedelta
+from typing import Dict, Tuple
 
 # Add the perplexity_api directory to the Python path
 sys.path.append(str(Path(__file__).parent / "perplexity_api"))
@@ -67,7 +69,7 @@ Examples:
     return parser.parse_args()
 
 
-def load_prompt_config(prompt_file: str = "prompts/prompt.yaml") -> dict:
+def load_prompt_config(prompt_file: str = "prompts/prompt.yaml") -> Dict:
     """
     Load the prompt configuration from YAML file.
     
@@ -75,7 +77,7 @@ def load_prompt_config(prompt_file: str = "prompts/prompt.yaml") -> dict:
         prompt_file (str): Path to the prompt YAML file
         
     Returns:
-        dict: Configuration containing prompt and model information
+        Dict: Configuration containing prompt and model information
         
     Raises:
         FileNotFoundError: If the prompt file doesn't exist
@@ -91,7 +93,7 @@ def load_prompt_config(prompt_file: str = "prompts/prompt.yaml") -> dict:
         raise yaml.YAMLError(f"Error parsing YAML file: {e}")
 
 
-def calculate_date_range(days: int = 60) -> tuple[datetime, datetime, str, str]:
+def calculate_date_range(days: int = 60) -> Tuple[datetime, datetime, str, str]:
     """
     Calculate start and end dates for the monitoring period.
     
@@ -99,7 +101,7 @@ def calculate_date_range(days: int = 60) -> tuple[datetime, datetime, str, str]:
         days (int): Number of days to look back from today for start_date (default: 60)
         
     Returns:
-        tuple[datetime, datetime, str, str]: (start_date, end_date, start_date_str, end_date_str)
+        Tuple[datetime, datetime, str, str]: (start_date, end_date, start_date_str, end_date_str)
     """
     end_date = datetime.now()
     start_date = end_date - timedelta(days=days)
@@ -131,17 +133,17 @@ def load_email_template(template_file: str = "templates/email_template.html") ->
         raise FileNotFoundError(f"Email template file not found: {template_file}")
 
 
-def extract_prompt_data(config: dict, prompt_type: str = "veille_juridique", days: int = 60) -> tuple[str, str]:
+def extract_prompt_data(config: Dict, prompt_type: str = "veille_juridique", days: int = 60) -> Tuple[str, str]:
     """
     Extract prompt and model from the configuration.
     
     Args:
-        config (dict): Configuration dictionary from YAML
+        config (Dict): Configuration dictionary from YAML
         prompt_type (str): Type of prompt to extract ('veille_juridique' or 'veille_pedagogique_technologique')
         days (int): Number of days to look back from today for start_date (default: 60)
         
     Returns:
-        tuple[str, str]: (prompt, model)
+        Tuple[str, str]: (prompt, model)
         
     Raises:
         KeyError: If required keys are missing from configuration
@@ -213,7 +215,7 @@ def clean_response_text(response_text: str) -> str:
     return response_text
 
 
-def load_recipients_config(recipients_file: str = "recipients.json") -> dict:
+def load_recipients_config(recipients_file: str = "recipients.json") -> Dict:
     """
     Load recipients configuration from JSON file.
     
@@ -221,13 +223,12 @@ def load_recipients_config(recipients_file: str = "recipients.json") -> dict:
         recipients_file (str): Path to the recipients JSON file
         
     Returns:
-        dict: Configuration containing to and cc recipients
+        Dict: Configuration containing to and cc recipients
         
     Raises:
         FileNotFoundError: If the recipients file doesn't exist
         json.JSONDecodeError: If the JSON file is malformed
     """
-    import json
     try:
         with open(recipients_file, 'r', encoding='utf-8') as file:
             config = json.load(file)
@@ -400,13 +401,11 @@ def main():
         api = PerplexityClient(api_key=api_key)
         print("✅ API client initialized")
         
- 
         # Step 4: Send request to Perplexity AI
         print("🚀 Sending request to Perplexity AI...")
         print(f"   Using model: {model}")
         print("   Processing request...")
         
-        #response_text ="test"
         response_text = api.ask(
             question=prompt,
             model=model,
