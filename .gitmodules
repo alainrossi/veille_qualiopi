@@ -1,0 +1,6 @@
+[submodule "emailer"]
+	path = emailer
+	url = D:/IT/PythonProjects/emailer
+[submodule "mammouth_api"]
+	path = mammouth_api
+	url = D:/IT/PythonProjects/mammouth_api

@@ -1,0 +1,4 @@
+# Ensure submodules are handled properly
+* text=auto
+emailer/ export-ignore
+mammouth_api/ export-ignore
