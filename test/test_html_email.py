@@ -24,7 +24,8 @@ def test_html_email():
     try:
         # Load email configuration from .env file
         print("📧 Loading email configuration...")
-        email_config = load_from_dotenv('.env')
+        project_root = Path(__file__).parent.parent
+        email_config = load_from_dotenv(str(project_root / '.env'))
         
         if not email_config.get('email') or not email_config.get('password'):
             print("❌ Email configuration not found in .env file")

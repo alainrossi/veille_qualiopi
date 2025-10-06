@@ -84,11 +84,15 @@ def load_prompt_config(prompt_file: str = "prompts/prompt.yaml") -> Dict:
         yaml.YAMLError: If the YAML file is malformed
     """
     try:
-        with open(prompt_file, 'r', encoding='utf-8') as file:
+        base_dir = Path(__file__).parent
+        prompt_path = Path(prompt_file)
+        if not prompt_path.is_absolute():
+            prompt_path = base_dir / prompt_path
+        with open(prompt_path, 'r', encoding='utf-8') as file:
             config = yaml.safe_load(file)
             return config
     except FileNotFoundError:
-        raise FileNotFoundError(f"Prompt file not found: {prompt_file}")
+        raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
     except yaml.YAMLError as e:
         raise yaml.YAMLError(f"Error parsing YAML file: {e}")
 
@@ -127,10 +131,14 @@ def load_email_template(template_file: str = "templates/email_template.html") ->
         FileNotFoundError: If the template file doesn't exist
     """
     try:
-        with open(template_file, 'r', encoding='utf-8') as file:
+        base_dir = Path(__file__).parent
+        template_path = Path(template_file)
+        if not template_path.is_absolute():
+            template_path = base_dir / template_path
+        with open(template_path, 'r', encoding='utf-8') as file:
             return file.read()
     except FileNotFoundError:
-        raise FileNotFoundError(f"Email template file not found: {template_file}")
+        raise FileNotFoundError(f"Email template file not found: {template_path}")
 
 
 def extract_prompt_data(config: Dict, prompt_type: str = "veille_juridique", days: int = 60) -> Tuple[str, str]:
@@ -168,7 +176,7 @@ def extract_prompt_data(config: Dict, prompt_type: str = "veille_juridique", day
         end_year = current_year + 1
         
         # Calculate report date (3 months ago for the English prompt)
-        report_date = (datetime.now() - timedelta(days=90)).strftime("%d/%m/%Y")
+        report_date = (datetime.now() - timedelta(days=days)).strftime("%d/%m/%Y")
         
         # Replace placeholders in prompt
         prompt = prompt.replace("{start_date}", start_date_str)
@@ -230,11 +238,15 @@ def load_recipients_config(recipients_file: str = "recipients.json") -> Dict:
         json.JSONDecodeError: If the JSON file is malformed
     """
     try:
-        with open(recipients_file, 'r', encoding='utf-8') as file:
+        base_dir = Path(__file__).parent
+        recipients_path = Path(recipients_file)
+        if not recipients_path.is_absolute():
+            recipients_path = base_dir / recipients_path
+        with open(recipients_path, 'r', encoding='utf-8') as file:
             config = json.load(file)
             return config
     except FileNotFoundError:
-        raise FileNotFoundError(f"Recipients file not found: {recipients_file}")
+        raise FileNotFoundError(f"Recipients file not found: {recipients_path}")
     except json.JSONDecodeError as e:
         raise json.JSONDecodeError(f"Error parsing JSON file: {e}")
 
@@ -254,8 +266,9 @@ def send_email_report(response_text: str, prompt_type: str = "veille_juridique",
     try:
         print("📧 Loading email configuration...")
         
-        # Load email configuration from .env file
-        email_config = load_from_dotenv('.env')
+        # Load email configuration from .env file (resolve relative to script dir)
+        base_dir = Path(__file__).parent
+        email_config = load_from_dotenv(str(base_dir / '.env'))
         
         if not email_config.get('email') or not email_config.get('password'):
             print("❌ Email configuration not found in .env file")
